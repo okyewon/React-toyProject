@@ -5,6 +5,7 @@ import generateRandomNumber from './random';
 function App() {
   const [randomNumber, setRandomNumber] = useState(generateRandomNumber());
   const [answer, setAnswer] = useState('');
+  const [logs, setLogs] = useState([]);
 
   useEffect(() => {
     
@@ -19,7 +20,7 @@ function App() {
     const answers = answer.split('').map(item => Number(item));
     const { strike, ball } = randomNumber.reduce((prev, cur, idx) => {
       // strike
-      if(answer[idx] === cur) {
+      if(answers[idx] === cur) {
         return {
           ...prev,
           strike: prev.strike + 1
@@ -30,13 +31,17 @@ function App() {
       if(answer.includes(cur)) {
         return {
           ...prev,
-          strike: prev.strike + 1
+          ball: prev.ball + 1
         }
       }
+
+      return prev
     }, {
       strike: 0,
       ball: 0
     })
+
+    setLogs([ ...logs, `${answer} (strike: ${strike}, ball: ${ball})` ])
   }
 
   return (
@@ -49,9 +54,13 @@ function App() {
       </section>
       <h2>기록</h2>
       <ol>
-        <li>1234 (strike: 0, ball: 2)</li>
-        <li>4567 (strike: 1, ball: 1)</li>
-        <li>7896 (strike: 1, ball: 1)</li>
+        {
+          logs.map((log, idx) => {
+            return (
+              <li key={`${log}_${idx}`}>{log}</li>
+            )
+          })
+        }
       </ol>
     </div>
   );
