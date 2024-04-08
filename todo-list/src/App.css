@@ -1,0 +1,17 @@
+body {
+  background-color: rgba(207, 232, 255);
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  min-width: 500px;
+  margin-top: 32px;
+  padding: 32px;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+}
