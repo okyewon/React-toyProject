@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import Logs from './Logs';
 import generateRandomNumber from './random';
 
 function App() {
@@ -7,10 +8,9 @@ function App() {
   const [answer, setAnswer] = useState('');
   const [logs, setLogs] = useState([]);
   const [isSuccess, setSuccess] = useState(false);
-  console.log(randomNumber)
 
   useEffect(() => {
-    
+    console.log(randomNumber)
   }, [randomNumber])
 
   const handleAnswerChanged = e => {
@@ -95,16 +95,7 @@ function App() {
           )
         }
       </section>
-      <h2>기록</h2>
-      <ol>
-        {
-          logs.map((log, idx) => {
-            return (
-              <li key={`${log}_${idx}`}>{log}</li>
-            )
-          })
-        }
-      </ol>
+      <Logs logs={logs} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export default function generateRandomNumber() {
+function generateRandomNumber() {
     // 1 ~ 9까지 숫자 사용
     const condidates = [1,2,3,4,5,6,7,8,9];
 
@@ -13,3 +13,5 @@ function shuffle(array) {
         return Math.random() - 0.5 // 50% 확률로 음수와 양수를 반환
     })
 }
+
+export default generateRandomNumber;
