@@ -20,6 +20,26 @@ function App() {
   const handleSubmit = () => {
     // strike, ball, right
     const answers = answer.split('').map(item => Number(item));
+
+    if(answers.some(n => isNaN(n))) {
+      alert('숫자만 입력해주세요');
+      return;
+    }
+
+    if(answers.length !== 4) {
+      alert('4자리 숫자만 입력해주세요');
+      return;
+    }
+
+    const isDuplicate = answers.some(n => {
+      return answers.indexOf(n) !== answers.lastIndexOf(n)
+    })
+
+    if(isDuplicate) {
+      alert('중복 된 숫자가 있습니다.');
+      return;
+    }
+
     const { strike, ball } = randomNumber.reduce((prev, cur, idx) => {
       // strike
       if(answers[idx] === cur) {
