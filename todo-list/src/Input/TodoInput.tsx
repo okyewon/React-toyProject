@@ -5,7 +5,7 @@ const TodoInput = () => {
     return (
         <section className={style.container}>
             <form className={style.formContainer}>
-                <input className={style.input} />
+                <input className={style.input} placeholder={'해야 할 Todo'} />
             </form>
             <button className={style.enter}><RiChatNewLine /></button>
         </section>

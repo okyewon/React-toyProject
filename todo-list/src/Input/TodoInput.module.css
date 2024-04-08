@@ -16,6 +16,10 @@
     font-size: 20px;
 }
 
+.input::placeholder {
+    font-size: 16px;
+}
+
 .enter {
     padding: 8px 16px;
     background-color: #fff;

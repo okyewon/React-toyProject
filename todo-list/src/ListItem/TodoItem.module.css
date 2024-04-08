@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+    padding: 8px;
+    font-size: 18px;
+}
+
+.container:hover {
+    background-color: #f5f5f5;
+}
+
+.container:hover .removeIcon {
+    visibility: visible;
+}
+
+.checkIcon {
+    margin-right: 16px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.checkedIcon {
+    color: #32cd32;
+}
+
+.unCheckedIcon {
+    color: #c0c0c0;
+}
+
+.removeIcon {
+    margin-left: auto;
+    font-size: 28px;
+    color: red;
+    cursor: pointer;
+    visibility: hidden;
+}
