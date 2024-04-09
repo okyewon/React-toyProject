@@ -4,14 +4,14 @@ import { IoMdRemoveCircleOutline } from "react-icons/io";
 
 interface TodoItemProps {
     text: string
+    isChecked: boolean
 }
 
 const TodoItem = (props: TodoItemProps) => {
-    const isCheck = false;
 
     return (
         <li className={styles.container}>
-            <BsCheckCircle className={[styles.checkIcon, `${isCheck ? styles.checkedIcon : styles.unCheckedIcon}`].join(" ")} />
+            <BsCheckCircle className={[styles.checkIcon, `${props.isChecked ? styles.checkedIcon : styles.unCheckedIcon}`].join(" ")} />
             <span>{props.text}</span>
             <IoMdRemoveCircleOutline className={styles.removeIcon} />
         </li>
