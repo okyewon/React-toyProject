@@ -35,3 +35,8 @@
     cursor: pointer;
     visibility: hidden;
 }
+
+.linethrough {
+    text-decoration: line-through;
+    color: #c0c0c0;
+}

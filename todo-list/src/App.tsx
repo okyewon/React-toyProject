@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import Divider from './Divider/Divider';
 import TodoHeader from './Header/TodoHeader';
 import TodoInput from './Input/TodoInput';
@@ -22,6 +22,10 @@ function App() {
   }
 
   const handleSubmit = () => {
+    if(!text) {
+      return;
+    }
+
     const newTodos = todos.concat({
       id: Date.now(),
       text: text,
@@ -32,14 +36,58 @@ function App() {
     setText('')
   }
 
+  const handleToggle = (id: number) => {
+    const newTodos = todos.map(todo => {
+      if(todo.id === id) {
+        return {
+          ...todo,
+          isChecked: !todo.isChecked
+        }
+      }
+
+      return todo
+    })
+
+    setTodos(newTodos)
+  }
+
+  const handleRemove = (id: number) => {
+    const newTodos = todos.filter(todo => {
+      return todo.id !== id
+    })
+
+    setTodos(newTodos)
+  }
+
+  const isTodoAllChecked = () => {
+    return todos.every(todo => todo.isChecked)
+  }
+
+  const handleToggleAllClick = () => {
+    const isAllChecked = isTodoAllChecked()
+
+    const newTodos = todos.map(todo => {
+      return {
+        ...todo,
+        isChecked: !isAllChecked
+      }
+    })
+
+    setTodos(newTodos)
+  }
+
+  const handleRemoveAllClick = () => {
+    setTodos([]);
+  }
+
   return (
     <main className="App">
       <TodoHeader count={todos.filter(todo => !todo.isChecked).length} />
       <TodoInput text={text} onTextChange={handleTextChange} onSubmit={handleSubmit} />
       <TodoListArea todoCount={todos.length}>
-        <TodoListTools />
+        <TodoListTools isAllChecked={isTodoAllChecked()} onRemoveAllClick={handleRemoveAllClick} onToggleAllClick={handleToggleAllClick} />
         <Divider />
-        <TodoList todos={todos} />
+        <TodoList todos={todos} onRemoveClick={handleRemove} onToggleClick={handleToggle} />
       </TodoListArea>
     </main>
   );
