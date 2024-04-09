@@ -5,6 +5,7 @@ import TodoHeader from './Header/TodoHeader';
 import TodoInput from './Input/TodoInput';
 import TodoList from './List/TodoList';
 import TodoListTools from './Tools/TodoListTools';
+import TodoListArea from './List/TodoListArea';
 
 export type TodoType = {
   id: number
@@ -21,16 +22,25 @@ function App() {
   }
 
   const handleSubmit = () => {
-    
+    const newTodos = todos.concat({
+      id: Date.now(),
+      text: text,
+      isChecked: false
+    })
+
+    setTodos(newTodos)
+    setText('')
   }
 
   return (
     <main className="App">
-      <TodoHeader />
+      <TodoHeader count={todos.filter(todo => !todo.isChecked).length} />
       <TodoInput text={text} onTextChange={handleTextChange} onSubmit={handleSubmit} />
-      <TodoListTools />
-      <Divider />
-      <TodoList todos={todos} />
+      <TodoListArea todoCount={todos.length}>
+        <TodoListTools />
+        <Divider />
+        <TodoList todos={todos} />
+      </TodoListArea>
     </main>
   );
 }
