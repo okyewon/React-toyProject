@@ -82,6 +82,7 @@ const Body = styled.section`
 
 const Image = styled.img`
     width: 85%;
+    max-height: 225px;
 `
 
 const Footer = styled.section`
