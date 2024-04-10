@@ -25,6 +25,7 @@ const PageHeader = () => {
                 <option value={POKEMON_IMAGE_TYPE.HOME_FRONT}>HomeFront</option>
                 <option value={POKEMON_IMAGE_TYPE.OFFICIAL_ARTWORT}>Official</option>
                 <option value={POKEMON_IMAGE_TYPE.DREAM_WORLD}>DreamWorld</option>
+                <option value={POKEMON_IMAGE_TYPE.SHOW_FRONT}>GIF</option>
             </Select>
         </Header>
     )
