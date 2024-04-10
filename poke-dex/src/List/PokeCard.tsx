@@ -5,9 +5,6 @@ import PokeMarkChip from "../Common/PokeMarkChip";
 import PokeNameChip from "../Common/PokeNameChip";
 import { fetchPokemonDetail, PokemonDetailType } from "../Service/pokemonService";
 
-
-const ImgURL = 'https://cdn.nookazon.com/pokemonswordshield/generation-i/bulbasaur.png'
-
 interface PokeCardProps {
     name: string
 }
@@ -32,9 +29,9 @@ const PokeCard = (props:PokeCardProps) => {
     }
 
     return (
-        <Item onClick={handleClick}>
+        <Item onClick={handleClick} color={pokemon.color}>
             <Header>
-                <PokeNameChip name={pokemon.name} id={pokemon.id} />
+                <PokeNameChip name={pokemon.koreanName} color={pokemon.color} id={pokemon.id} />
             </Header>
             <Body>
                 <Image src={pokemon.images.dreamWorldFront} alt={pokemon.name} />
@@ -46,7 +43,7 @@ const PokeCard = (props:PokeCardProps) => {
     )
 }
 
-const Item = styled.li`
+const Item = styled.li<{ color: string}>`
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -66,7 +63,7 @@ const Item = styled.li`
 
     &:active {
         opacity: 0.5;
-        background-color: yellow;
+        background-color: ${props => props.color};
         transition: background-color 0s;
     }
 `
