@@ -1,16 +1,30 @@
 import styled from "@emotion/styled";
+import { ChangeEvent } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { POKEMON_IMAGE_TYPE } from "../Constants";
+import { RootState, useAppDispatch } from "../Store";
+import { changeImageType, PokemonImageType } from "../Store/imageTypeSlice";
 
 const PageHeader = () => {
+    const type = useSelector((state: RootState) => state.imageType.type)
+    const dispatch = useAppDispatch()
+
+    const handleChange = (e:ChangeEvent<HTMLSelectElement>) => {
+        dispatch(changeImageType({
+            type: e.target.value as PokemonImageType
+        }))
+    }
+
     return (
         <Header>
             <Title>
                 <Link to="/">Pokémon</Link>
             </Title>
-            <Select>
-                <option value="Official">Official</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
+            <Select value={type} onChange={handleChange}>
+                <option value={POKEMON_IMAGE_TYPE.HOME_FRONT}>HomeFront</option>
+                <option value={POKEMON_IMAGE_TYPE.OFFICIAL_ARTWORT}>Official</option>
+                <option value={POKEMON_IMAGE_TYPE.DREAM_WORLD}>DreamWorld</option>
             </Select>
         </Header>
     )

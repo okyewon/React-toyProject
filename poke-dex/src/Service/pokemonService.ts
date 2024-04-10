@@ -92,7 +92,6 @@ export const fetchPokemonDetail = async (name: string):Promise<PokemonDetailType
     const speciesResponse = await remote.get<PokemonSpeciesResponseType>(pokemonSpeciesURL);
     const detail = response.data;
     const species = speciesResponse.data;
-    console.log(detail)
 
     const koreanName = species.names.find(item => item.language.name === 'ko')?.name ?? detail.name;
 
