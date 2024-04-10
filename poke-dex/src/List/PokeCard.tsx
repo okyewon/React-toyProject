@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import PokeMarkChip from "../Common/PokeMarkChip";
 import PokeNameChip from "../Common/PokeNameChip";
 import { fetchPokemonDetail, PokemonDetailType } from "../Service/pokemonService";
+import { PokeImageSkeleton } from "../Common/PokeImageSkeleton";
+
 
 interface PokeCardProps {
     name: string
@@ -25,7 +27,19 @@ const PokeCard = (props:PokeCardProps) => {
     }, [props.name])
 
     if(!pokemon) {
-        return null;
+        return (
+            <Item color={'#fff'}>
+                <Header>
+                    <PokeNameChip name={'???'} color={'#ffca06'} id={0} />
+                </Header>
+                <Body>
+                    <PokeImageSkeleton />
+                </Body>
+                <Footer>
+                    <PokeMarkChip />
+                </Footer>
+            </Item>
+        )
     }
 
     return (
@@ -34,7 +48,7 @@ const PokeCard = (props:PokeCardProps) => {
                 <PokeNameChip name={pokemon.koreanName} color={pokemon.color} id={pokemon.id} />
             </Header>
             <Body>
-                <Image src={pokemon.images.dreamWorldFront} alt={pokemon.name} />
+                <Image src={pokemon.images.homeFrontDefault} alt={pokemon.name} />
             </Body>
             <Footer>
                 <PokeMarkChip />

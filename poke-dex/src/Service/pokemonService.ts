@@ -36,6 +36,9 @@ interface PokemonDetailResponseType {
             dream_world: {
                 front_default: string
             }
+            home: {
+                front_default: string
+            }
             'official-artwork': {
                 front_default: string
             }
@@ -71,6 +74,7 @@ export interface PokemonDetailType {
     types: string[],
     images: {
         frontDefault: string,
+        homeFrontDefault: string,
         dreamWorldFront: string,
         officialArtworkFront: string
     },
@@ -88,6 +92,7 @@ export const fetchPokemonDetail = async (name: string):Promise<PokemonDetailType
     const speciesResponse = await remote.get<PokemonSpeciesResponseType>(pokemonSpeciesURL);
     const detail = response.data;
     const species = speciesResponse.data;
+    console.log(detail)
 
     const koreanName = species.names.find(item => item.language.name === 'ko')?.name ?? detail.name;
 
@@ -101,6 +106,7 @@ export const fetchPokemonDetail = async (name: string):Promise<PokemonDetailType
         types: detail.types.map(item => item.type.name),
         images: {
             frontDefault: detail.sprites.front_default,
+            homeFrontDefault: detail.sprites.other.home.front_default,
             dreamWorldFront: detail.sprites.other.dream_world.front_default,
             officialArtworkFront: detail.sprites.other["official-artwork"].front_default
         },

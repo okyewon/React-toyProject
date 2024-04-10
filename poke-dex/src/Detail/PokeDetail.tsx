@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { PokeImageSkeleton } from "../Common/PokeImageSkeleton";
 import PokeMarkChip from "../Common/PokeMarkChip";
 import { fetchPokemonDetail, PokemonDetailType } from "../Service/pokemonService";
 
@@ -22,13 +23,23 @@ const PokeDetail = () => {
     }, [name])
 
     if(!name || !pokemon) {
-        return null;
+        return (
+            <Container>
+                <ImageContainer>
+                    <PokeImageSkeleton />
+                </ImageContainer>
+                <Divider />
+                <Footer>
+                    <PokeMarkChip />
+                </Footer>
+            </Container>
+        );
     }
 
     return (
         <Container>
             <ImageContainer>
-                <Image src={pokemon.images.dreamWorldFront} alt={pokemon.koreanName} />
+                <Image src={pokemon.images.homeFrontDefault} alt={pokemon.koreanName} />
             </ImageContainer>
             <Divider />
             <Body>
@@ -92,6 +103,7 @@ const ImageContainer = styled.section`
     flex: 1 1 auto;
     justify-content: center;
     align-items: center;
+    min-height: 350px;
     margin: 8px 0;
 `
 
