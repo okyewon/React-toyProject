@@ -12,7 +12,7 @@ export interface PokemonListResponseType {
     }[]
 }
 
-export const fetchPokemons = async(nextURL? : string) => {
+export const fetchPokemonsAPI = async(nextURL? : string) => {
     const requestURL = nextURL ? nextURL : 'https://pokeapi.co/api/v2/pokemon'
     
     const response = await remote.get<PokemonListResponseType>(requestURL)
