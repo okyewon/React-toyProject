@@ -2,6 +2,10 @@ const path = require('path'); // import path from 'path' 를 commonJS 로 작성
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
+dotenv.config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -63,6 +67,9 @@ module.exports = {
             linkType: false,
             filename: '[name].[contenthash:8].css'
         }) 
-        : undefined
+        : undefined,
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(process.env)
+        })
     ].filter(Boolean)
 }
