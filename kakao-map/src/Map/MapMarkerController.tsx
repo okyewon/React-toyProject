@@ -5,6 +5,7 @@ import { PlactType } from "./mapTypes";
 
 interface MapMarkerControllerProps {
     places: PlactType[]
+    selectedPlaceId?: string
 }
 
 const MapMarkerController = (props:MapMarkerControllerProps) => {
@@ -22,14 +23,16 @@ const MapMarkerController = (props:MapMarkerControllerProps) => {
             bounds.extend(place.position);
         })
 
-        map.setBounds
+        map.setBounds(bounds);
     }, [props.places])
 
     return (
         <>
             {
-                props.places.map((place) => {
-                    return <MapMarker key={place.id} place={place} />
+                props.places.map((place, index) => {
+                    return (
+                    <MapMarker key={place.id} place={place} index={index} showInfo={props.selectedPlaceId === place.id} />
+                    )
                 })
             }
         </>
